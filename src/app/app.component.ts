@@ -8,7 +8,11 @@ import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
-
+import { SpeakerDetailPage } from '../pages/speaker-detail/speaker-detail';
+import { ShelterListPage } from '../pages/shelters/shelters';
+import { AboutPage } from '../pages/about/about';
+import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
+import { MapPage } from '../pages/map/map';
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 
@@ -31,11 +35,11 @@ export class ConferenceApp {
   // List of pages that can be navigated to from the left menu
   // the left menu only works after login
   // the login page disables the left menu
-  appPages: PageObj[] = [
-    { title: 'Schedule', component: TabsPage, icon: 'calendar' },
-    { title: 'Speakers', component: TabsPage, index: 1, icon: 'contacts' },
-    { title: 'Map', component: TabsPage, index: 2, icon: 'map' },
-    { title: 'About', component: TabsPage, index: 3, icon: 'information-circle' },
+  appPages: PageObj[] = [    
+    { title: 'Map', component: MapPage, icon: 'map' },    
+    { title: 'Finder', component: SpeakerListPage, index: 1, icon: 'person'},
+    { title: 'About', component: AboutPage, index: 2, icon: 'information-circle' },
+    { title: 'Shelters', component: ShelterListPage, index: 3, icon: 'home'}
   ];
   loggedInPages: PageObj[] = [
     { title: 'Account', component: AccountPage, icon: 'person' },
@@ -45,8 +49,7 @@ export class ConferenceApp {
     { title: 'Login', component: LoginPage, icon: 'log-in' },
     { title: 'Signup', component: SignupPage, icon: 'person-add' }
   ];
-  rootPage: any = TutorialPage;
-
+  rootPage: any = SpeakerListPage;
   constructor(
     public events: Events,
     public userData: UserData,

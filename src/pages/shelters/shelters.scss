@@ -1,0 +1,18 @@
+
+page-shelter-list {
+
+  ion-card.shelter ion-card-header .item {
+    padding: 12px;
+  }
+
+  ion-card.shelter ion-card-content .list {
+    margin: 0;
+  }
+
+  ion-card.shelter ion-card-header,
+  ion-card.shelter ion-card-content,
+  ion-card.shelter ion-card-content .list ion-item-content, {
+    padding: 0;
+  }
+
+}

@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Shelters</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="outer-content speaker-list">  
+    <ion-fab edge top right #fab>
+      <button ion-fab><ion-icon name="md-add"></ion-icon></button>
+      <ion-fab-list side="bottom">
+     <button color="dark" ion-fab (click)="add_shelter(fab)"><ion-icon name="home"></ion-icon></button>
+     <!--<button color="dark" ion-fab (click)="share()"><ion-icon name="ios-send"></ion-icon></button> 
+     <button color="dark" ion-fab (click)="open_scan(fab)"><ion-icon name="ios-open"></ion-icon></button>    -->
+   </ion-fab-list>
+  </ion-fab>
+  <ion-toolbar no-border-top *ngIf="search">    
+    <ion-buttons end><button ion-button button-left clear (click)="showSearch()">Hide</button></ion-buttons>
+    <ion-searchbar color="primary"
+                   [(ngModel)]="queryText"
+                   [showCancelButton]="true"
+                   (ionInput)="searchShelters()"
+                   placeholder="Search">
+    </ion-searchbar>
+  </ion-toolbar>  
+  <ion-card *ngFor="let shelter of shelters" class="shelter">
+    <ion-card-header>
+      <ion-item>
+        <ion-avatar item-left>
+          <img src="assets/img/woman.jpeg">
+        </ion-avatar>
+        {{shelter.profile.name}}        
+        <button ion-button icon-only item-right>
+          <ion-icon name="home"></ion-icon><pre> </pre><ion-icon color="danger" name="help-circle"></ion-icon>  
+        </button>          
+      </ion-item>
+    </ion-card-header>
+
+    <ion-card-content class="outer-content">
+      <ion-list>
+        <button ion-item (click)="goToShelterDetail(shelter)">
+          <h3>Details</h3>
+        </button>
+      </ion-list>
+    </ion-card-content>
+
+    <ion-item>
+      <button ion-button icon-left (click)="openContact(shelter)" clear item-left>
+        <ion-icon name="call"></ion-icon>
+        Contact
+      </button>
+      <button ion-button icon-middle (click)="openDirections(shelter)" clear item-middle>
+        <ion-icon name="navigate"></ion-icon>
+        <pre> </pre>Last Location
+      </button>
+      <button ion-button icon-left (click)="openSpeakerShare(shelter)" clear item-right>
+        <ion-icon name="share"></ion-icon>
+        Share Last
+      </button>
+    </ion-item>
+
+  </ion-card>
+</ion-content>

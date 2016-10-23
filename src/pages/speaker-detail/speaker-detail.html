@@ -1,14 +1,14 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{speaker.name}}</ion-title>
+    <ion-title>{{speaker.profile.name}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding class="speaker-detail">
 
   <div text-center>
-    <img [src]="speaker.profilePic" [alt]="speaker.name"><br>
-
+    <img src="assets/img/woman.jpeg"><br>
+<!--
     <button ion-button icon-only clear small color="twitter">
       <ion-icon name="logo-twitter"></ion-icon>
     </button>
@@ -17,9 +17,33 @@
     </button>
     <button ion-button icon-only clear small color="instagram">
       <ion-icon name="logo-instagram"></ion-icon>
-    </button>
+    </button>-->
   </div>
 
-  <p>{{speaker.about}}</p>
+  <!--<p>{{speaker.about}}</p>-->
+  <ion-card>
 
+  <!--<img src='https://maps.googleapis.com/maps/api/staticmap?center=63.259591,-144.667969&zoom=6&size=400X400&markers=color:blue%7Clabel:S%7C62.107733,-145.541936&markers=size:tiny%7Ccolor:green%7CDelta+Junction,AK&markers=size:mid%7Ccolor:0xFFFF00%7Clabel:C%7CTok,AK"&key=AIzaSyC7k3Oz4luJAXfTSSlWq1191KHr1nrsIO8'>-->
+  <ion-item>Last known location</ion-item>
+  <ion-fab right top>
+    <button ion-fab>
+      <ion-icon name="pin"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <ion-item>
+    <ion-icon name="navigate" item-left large></ion-icon>
+    <h2>{{speaker.reports[0].latitude}}, {{speaker.reports[0].longitude}}</h2>    
+  </ion-item>
+
+  <ion-item>
+    <span item-left>18 min</span>
+    <span item-left>(2.6 mi)</span>
+    <button primary clear item-right>
+      <ion-icon name="navigate"></ion-icon>
+      Start
+    </button>
+  </ion-item>
+
+</ion-card>
 </ion-content>

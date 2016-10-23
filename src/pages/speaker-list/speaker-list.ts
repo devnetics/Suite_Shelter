@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-
+import { Http } from '@angular/http';
 import { ActionSheet, ActionSheetController, Config, NavController } from 'ionic-angular';
 // import { InAppBrowser } from 'ionic-native';
 
 import { ConferenceData } from '../../providers/conference-data';
-import { SessionDetailPage } from '../session-detail/session-detail';
 import { SpeakerDetailPage } from '../speaker-detail/speaker-detail';
 
 
@@ -15,19 +14,27 @@ import { SpeakerDetailPage } from '../speaker-detail/speaker-detail';
 export class SpeakerListPage {
   actionSheet: ActionSheet;
   speakers = [];
+  search = false;
+  queryText: string;
 
-  constructor(public actionSheetCtrl: ActionSheetController, public navCtrl: NavController, public confData: ConferenceData, public config: Config) {
-    confData.getSpeakers().then(speakers => {
-      this.speakers = speakers;
+  constructor(public http: Http, public actionSheetCtrl: ActionSheetController, public navCtrl: NavController, public confData: ConferenceData, public config: Config) {
+    // confData.getSpeakers().then(speakers => {
+    //   this.speakers = speakers;
+    // });
+  }
+
+  searchUser() {
+    this.http.get('http://localhost:8080/hl_users?name=' + this.queryText).subscribe( res => {
+      this.speakers = res.json();
     });
   }
 
-  goToSessionDetail(session) {
-    this.navCtrl.push(SessionDetailPage, session);
-  }
+  showSearch() {
+    this.search = !this.search;
+  }  
 
-  goToSpeakerDetail(speakerName: string) {
-    this.navCtrl.push(SpeakerDetailPage, speakerName);
+  goToSpeakerDetail(speaker: any) {
+    this.navCtrl.push(SpeakerDetailPage, speaker);
   }
 
   goToSpeakerTwitter(speaker) {
@@ -88,7 +95,7 @@ export class SpeakerListPage {
           text: `Call ( ${speaker.phone} )`,
           icon: mode !== 'ios' ? 'call' : null,
           handler: () => {
-            window.open('tel:' + speaker.phone);
+            window.open('tel:' + speaker.profile.phone);
           }
         }
       ]
